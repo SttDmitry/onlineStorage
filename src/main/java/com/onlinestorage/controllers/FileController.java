@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Controller
@@ -34,7 +35,7 @@ public class FileController {
             return ResponseEntity.badRequest().body("File is Empty");
         }
 
-        String hash = fileStoreService.storeFile(file.getBytes(), file.getOriginalFilename(), subType);
+        String hash = fileStoreService.storeFile(file.getBytes(), file.getOriginalFilename(), subType, file.getSize(), LocalDateTime.now());
         return ResponseEntity.ok(hash);
     }
 
